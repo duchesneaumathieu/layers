@@ -1,5 +1,5 @@
 import theano
-from lasagne.layers import *
+import lasagne
 
 class PaddingLayer(lasagne.layers.Layer):
     def __init__(self, incoming, left=None, right=None, both=None, val=0, **kwargs):
