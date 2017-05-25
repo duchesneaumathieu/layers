@@ -95,3 +95,24 @@ class AssignmentMaskOp(theano.Op):
         return [theano.gradient.disconnected_grad(inputs[0].astype('float32'))]
     
 assignmentMaskOp = AssignmentMaskOp()
+
+class Unravel_index_Op(theano.Op):
+    __props__ = ()
+
+    def make_node(self, x, y):
+        x = T.as_tensor_variable(x)
+        y = T.as_tensor_variable(y)
+        return theano.Apply(self, [x, y], [T.lmatrix().type()])
+
+    def perform(self, node, inputs, output_storage):
+        z = output_storage[0]
+        z[0] = np.stack(np.unravel_index(inputs[0], inputs[1]))
+
+    def infer_shape(self, node, i0_shapes):
+        return [[i0_shapes[1][0],i0_shapes[0][0]]]
+
+    def grad(self, inputs, output_grads):
+        return [theano.gradient.disconnected_grad(inputs[0]),
+                theano.gradient.disconnected_grad(inputs[1].astype('float32'))]
+
+unravel_index_Op = Unravel_index_Op()

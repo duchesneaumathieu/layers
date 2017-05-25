@@ -5,7 +5,7 @@ import lasagne
 
 from theano import scan
 from lasagne.layers import *
-from subs import SubLayer, OutputSplitLayer
+from indexing import SubLayer, OutputSplitLayer
 from collections import OrderedDict
 
 #Loop

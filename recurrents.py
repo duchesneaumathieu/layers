@@ -5,7 +5,7 @@ import lasagne
 from lasagne.layers import *
 from loops import LoopInitialLayer
 from specials import ZerosShapeLayer
-from subs import OutputSplitLayer
+from indexing import OutputSplitLayer
 
 
 class LstmUnitLayer(lasagne.layers.MergeLayer):

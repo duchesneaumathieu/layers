@@ -3,6 +3,14 @@ import theano.tensor as T
 import lasagne
 from lasagne.layers import *
 
+class NLLELayer(lasagne.layers.Layer):
+    #Negative Log Likelihood Estimator Layer
+    def get_output_for(self, input, **kwargs):
+        return -T.mean(T.log(input))
+    
+    def get_output_shape_for(self, shape, **kwargs):
+        return ()
+
 class PixelClassificationLayer(lasagne.layers.Layer):
     def get_output_for(self, input, **kwargs):
         (bs, cc, h, w) = input.shape
